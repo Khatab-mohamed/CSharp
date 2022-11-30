@@ -2,29 +2,49 @@
 
 namespace CSharp
 {
-    /*Abstract Classes
-    Cannot be Sealed
-    */
-    public abstract /*sealed*/ class Customer
+    // An interface cannot inherit from another interface only
+    // Cannot inherit from Abstract Class
+
+    interface ICustomer
+    {
+      //Interface cannot have fields
+      // int Id = 101;
+    }
+    /// <summary>
+    /// Can inherit from Abstract class an interface    
+    /// </summary>
+    public abstract class Customer
     { 
-        /* May Contain Abstract members
-         Abstract member cannot have implementation 
+        /*
+         Abstract Class's members can have access modifiers
+         Public
+         Protected
+         Private
+         internal
+             */
         
-         public abstract void printTest() { }
-    */    
-    public abstract void print();
+    public abstract void AbstractPrint();
+
+    //  Can have a Implementation for some of its members Methods
+    public void Print()
+    {
+            Console.WriteLine("Hi Form Abstract Member");
+    }
+    //Can Have Fields 
+    internal int Id;
+
+    //Can have Constructors with parameter or less
+    protected Customer(int id) { Id = id; }
+
+    protected Customer(){ }
 
     }
-    //  If class does not wish to provide Implementation for all the abstract members inherited
-    //  Then the class has to be marked as abstract
-    public class /*Abstract*/ Program : Customer
+    //  A class can inherit from multiple interfaces at the same time,
+    //  Cannot inherit from multiple Abstract Classes at the same time
+    public class Program : Customer
     {
-        /*
-         An Non Abstract Class Derived from Abstract class Must provide Implementation for all abstract members .
-         Using override KEYWORD
-         */
-
-        public override void print()
+        
+        public override void AbstractPrint()
         {
             Console.WriteLine("Hello From Print Abstract Method");
         }
