@@ -2,58 +2,47 @@
 
 namespace CSharp
 {
-    // An interface cannot inherit from another interface only
-    // Cannot inherit from Abstract Class
-
-    interface ICustomer
+    public class A
     {
-      //Interface cannot have fields
-      // int Id = 101;
+        public virtual void Print() { }
     }
-    /// <summary>
-    /// Can inherit from Abstract class an interface    
-    /// </summary>
-    public abstract class Customer
-    { 
-        /*
-         Abstract Class's members can have access modifiers
-         Public
-         Protected
-         Private
-         internal
-             */
-        
-    public abstract void AbstractPrint();
-
-    //  Can have a Implementation for some of its members Methods
-    public void Print()
+    public class B:A
     {
-            Console.WriteLine("Hi Form Abstract Member");
-    }
-    //Can Have Fields 
-    internal int Id;
-
-    //Can have Constructors with parameter or less
-    protected Customer(int id) { Id = id; }
-
-    protected Customer(){ }
-
-    }
-    //  A class can inherit from multiple interfaces at the same time,
-    //  Cannot inherit from multiple Abstract Classes at the same time
-    public class Program : Customer
-    {
-        
-        public override void AbstractPrint()
+        public override void Print()
         {
-            Console.WriteLine("Hello From Print Abstract Method");
+            Console.WriteLine("B Implementation");
         }
-
+    }
+    public class C:A
+    {
+        public override void Print()
+        {
+            Console.WriteLine("C Implementation");
+        }
+    }
+    /*
+             *  Class B & C are Inherited from class A and the are Overriding Print();
+             *  Class D inherits from both of them B,C
+             *  If D calls a method defined in class A
+             *  And B and C have overridden that method ,
+     * From which inherit: B or C ?
+     * This ambiguity called                                DIAMOND PROBLEM
+             */
+    class D :B,C
+    {
+        public override void Print()
+        {
+          Console.WriteLine("C Implementation");
+        }
+    }
+    public class Program
+    { 
         public static void Main()
         {
+            
+            D d=new D();
+            d.Print();
 
         }
     }
-
- 
 }
