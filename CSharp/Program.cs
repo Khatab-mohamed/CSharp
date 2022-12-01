@@ -2,47 +2,55 @@
 
 namespace CSharp
 {
-    public class A
+    interface IA
     {
-        public virtual void Print() { }
+        void AMethod();
     }
-    public class B:A
+
+    class A:IA
     {
-        public override void Print()
+        public void AMethod()
         {
-            Console.WriteLine("B Implementation");
+            Console.WriteLine("A");
         }
     }
-    public class C:A
+    interface IB
     {
-        public override void Print()
+        void BMethod();
+    }
+
+    class B:IB
+    {
+        public void BMethod()
         {
-            Console.WriteLine("C Implementation");
+            Console.WriteLine("B");
         }
     }
-    /*
-             *  Class B & C are Inherited from class A and the are Overriding Print();
-             *  Class D inherits from both of them B,C
-             *  If D calls a method defined in class A
-             *  And B and C have overridden that method ,
-     * From which inherit: B or C ?
-     * This ambiguity called                                DIAMOND PROBLEM
-             */
-    class D :B,C
+    
+    class C:IA,IB
     {
-        public override void Print()
+        A a =new A();
+        B b = new B();
+
+        public void AMethod()
         {
-          Console.WriteLine("C Implementation");
+            a.AMethod();
+        }
+
+        public void BMethod()
+        {
+            b.BMethod();
         }
     }
+
+
     public class Program
     { 
         public static void Main()
         {
-            
-            D d=new D();
-            d.Print();
-
+            C c= new C();
+            c.AMethod();
+            c.BMethod();
         }
     }
 }
