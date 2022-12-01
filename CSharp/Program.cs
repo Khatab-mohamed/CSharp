@@ -2,55 +2,26 @@
 
 namespace CSharp
 {
-    interface IA
-    {
-        void AMethod();
-    }
-
-    class A:IA
-    {
-        public void AMethod()
-        {
-            Console.WriteLine("A");
-        }
-    }
-    interface IB
-    {
-        void BMethod();
-    }
-
-    class B:IB
-    {
-        public void BMethod()
-        {
-            Console.WriteLine("B");
-        }
-    }
-    
-    class C:IA,IB
-    {
-        A a =new A();
-        B b = new B();
-
-        public void AMethod()
-        {
-            a.AMethod();
-        }
-
-        public void BMethod()
-        {
-            b.BMethod();
-        }
-    }
+    /// <summary>
+    ///     Delegate is type safe function pointer
+    ///     Reference Type;
+    ///  
+    /// </summary>
+    public delegate void HelloFunctionDelegate(string message);
 
 
     public class Program
-    { 
+    {
+        
         public static void Main()
         {
-            C c= new C();
-            c.AMethod();
-            c.BMethod();
+            var helloFunctionDelegate = new HelloFunctionDelegate(HelloMessage);
+            // we passing in the Name of the Function which we want the Delegate point To.
+            helloFunctionDelegate("Hi From Delegate"); 
+        }
+        public static void HelloMessage(string stringMessage)
+        {
+            Console.WriteLine(stringMessage);
         }
     }
 }
