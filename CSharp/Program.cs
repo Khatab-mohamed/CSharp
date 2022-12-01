@@ -4,9 +4,19 @@ using System.Collections.Generic;
 
 namespace CSharp
 {
+    // Delegate Declaration 
+    public delegate bool IsPromoteEmployee(Employee employee);
     public class Program
     {
-
+        /// <summary>
+        /// This is function which the Delegate can point To
+        /// </summary>
+        /// <param name="employee"></param>
+        /// <returns></returns>
+        public static bool PromotableCheck(Employee employee)
+        {
+            return employee.Experience >= 5;
+        }
         public static void Main()
         {
             IList<Employee> employees = new List<Employee>()
@@ -16,27 +26,33 @@ namespace CSharp
                 new Employee {Name = "Ali", Id = 103, Salary = 7000, Experience = 6},
                 new Employee {Name = "Han", Id = 104, Salary = 5000, Experience = 2}
             };
+            
+            //Delegate Initialization 
+            var isPromoteEmployee = new IsPromoteEmployee(PromotableCheck);
 
-            Employee.PromoteEmployee(employees);
-
+            //Using the delegate as a parameter
+            Employee.PromoteEmployee(employees,isPromoteEmployee);
         }
 
-        public class Employee
+      
+
+    }
+    public class Employee
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Salary { get; set; }
+        public int Experience { get; set; }
+
+        public static void PromoteEmployee(IList<Employee> employees, IsPromoteEmployee isEligiblePromoteEmployee)
         {
-            public int Id { get; set; }
-            public string Name { get; set; }
-            public int Salary { get; set; }
-            public int Experience { get; set; }
-
-            public static void PromoteEmployee(IList<Employee> employees)
+            foreach (var employee in employees)
             {
-                foreach (var employee in employees)
-                {
-                    if (employee.Experience >= 5)
-                        Console.WriteLine(employee.Name + " Promoted");
-                }
-
+                if (isEligiblePromoteEmployee(employee))
+                    Console.WriteLine(employee.Name + " Promoted");
             }
+
         }
     }
+
 }
