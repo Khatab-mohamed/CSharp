@@ -8,12 +8,12 @@ namespace CSharp
         {
             var customers =new Customer[3];
 
-            customers[1] = new Customer { Name = "Ali", Gender = 2};
-            customers[2] = new Customer { Name = "Omar", Gender = 1};
-            customers[3] = new Customer { Name = "Hassan", Gender = 1};
+            customers[0] = new Customer { Name = "Ali", Gender = 2};
+            customers[1] = new Customer { Name = "Omar", Gender = 1};
+            customers[2] = new Customer { Name = "Hassan", Gender = 0};
             foreach (var customer in customers)
             {
-                Console.WriteLine("Name: {0} Gender: {1}",customer.Name,customer.Gender);
+                Console.WriteLine("Name: {0} Gender: {1}",customer.Name,GetGender(customer.Gender) );
             }
         }
 
