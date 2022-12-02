@@ -8,30 +8,33 @@ namespace CSharp
         {
             var customers =new Customer[3];
 
-            customers[0] = new Customer { Name = "Ali", Gender = 2};
-            customers[1] = new Customer { Name = "Omar", Gender = 1};
-            customers[2] = new Customer { Name = "Hassan", Gender = 0};
+            customers[0] = new Customer { Name = "Ali", Gender = Gender.Female};
+            customers[1] = new Customer { Name = "Omar", Gender = Gender.Male};
+            customers[2] = new Customer { Name = "Hassan", Gender = Gender.Unknown};
             foreach (var customer in customers)
             {
-                Console.WriteLine("Name: {0} Gender: {1}",customer.Name,GetGender(customer.Gender) );
+                Console.WriteLine("Name: {0} Gender: {1}",customer.Name,customer.Gender );
             }
         }
 
-        public static string GetGender(int genderNumber)
-        {
-            switch (genderNumber)
-            {
-                case 0: return "Unknown";
-                case 1: return "Male";
-                case 2: return "Female";
-                default: return "Invalid data Detected";
-            }
-        }
     }
 
     public class Customer
     {
         public string Name { get; set; }
-        public int Gender { get; set; }
+        public Gender Gender { get; set; }
     }
+    /// <summary>
+    /// Enum is Strongly Typed Constants
+    /// for set of integral Numbers, replacing them with Enums
+    /// To make the code more---> Readable, Maintainable
+    /// </summary>
+
+    public enum Gender
+    {
+        Unknown,
+        Male,
+        Female
+    }
+    
 }
