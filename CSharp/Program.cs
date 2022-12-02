@@ -1,46 +1,37 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 
 namespace CSharp
 {
-    public  delegate void SampleDelegate();
     public class Program
     {
         public static void Main()
         {
-            SampleDelegate del1, del2, del3,del4;
-            del1= new SampleDelegate(SampleMethodOne);
-            del2= new SampleDelegate(SampleMethodTow);
-            del3= new SampleDelegate(SampleMethodThree);
-            // Multi Cast Delegate:
-            // is Delegate which is pointing to More than One Function
-            //                          UnRegister Function using -=
-            del4 = del1 + del2 + del3 - del2;
-            del4();
-            //Using += to Register this functions To Delegate
-            SampleDelegate del5= new SampleDelegate(SampleMethodOne);
-            del5 += SampleMethodTow;
-            del5 += SampleMethodThree;
-            del5 -= SampleMethodOne;
-            Console.WriteLine("---------------------");
+            var customers =new Customer[3];
 
-            del5();
+            customers[1] = new Customer { Name = "Ali", Gender = 2};
+            customers[2] = new Customer { Name = "Omar", Gender = 1};
+            customers[3] = new Customer { Name = "Hassan", Gender = 1};
+            foreach (var customer in customers)
+            {
+                Console.WriteLine("Name: {0} Gender: {1}",customer.Name,customer.Gender);
+            }
         }
 
-        public static void SampleMethodOne()
+        public static string GetGender(int genderNumber)
         {
-            Console.WriteLine("Sample Method One");
+            switch (genderNumber)
+            {
+                case 0: return "Unknown";
+                case 1: return "Male";
+                case 2: return "Female";
+                default: return "Invalid data Detected";
+            }
         }
-        public static void SampleMethodTow()
-        {
-            Console.WriteLine("Sample Method Two");
-        }
-        public static void SampleMethodThree()
-        {
-            Console.WriteLine("Sample Method Three");
-        }
-
     }
 
+    public class Customer
+    {
+        public string Name { get; set; }
+        public int Gender { get; set; }
+    }
 }
