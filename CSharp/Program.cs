@@ -6,24 +6,28 @@ namespace CSharp
     {
         public static void Main()
         {
-         var c = new Customer();
-         c.NonPartial();
+            
+            // 
+            AddNumbers(1,2,1,2,3,4,5);
+            //Second way to use optional parameters
+            AddNumbers(1,2,new object[] {1,2,3,4,5});
+        
+        }
+        //Optional Parameters using -->  params object[] 
+        public static void AddNumbers(int firstName, int secondNumber, params object[] restNumbers)
+        {
+            var result = firstName + secondNumber;
+            if (restNumbers!=null)
+            {
+                foreach (int number in restNumbers)
+                {
+                    result += number;
+                }
+                
+                Console.WriteLine(result);
+            }
         }
         
     }
 
-    /// <summary>
-    /// Partial Classes Allow Us to split classes into 2 or more Files
-    /// </summary>
-    public partial class Customer
-    {
-        partial void PrintPartial();
-
-        public void NonPartial()
-        {
-            Console.WriteLine("Non Partial Invokes");
-            PrintPartial();
-
-    }
-}
 }
