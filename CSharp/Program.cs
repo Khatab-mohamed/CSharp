@@ -6,8 +6,8 @@ namespace CSharp
     {
         public static void Main()
         {
-            var c1 = new Customer {FirstName = "Ali", LastName = "Omar"};
-            c1.Print();
+         var c = new Customer();
+         c.NonPartial();
         }
         
     }
@@ -17,7 +17,13 @@ namespace CSharp
     /// </summary>
     public partial class Customer
     {
-       public string FirstName { get; set; }
-       public string LastName { get; set; }
+        partial void PrintPartial();
+
+        public void NonPartial()
+        {
+            Console.WriteLine("Non Partial Invokes");
+            PrintPartial();
+
     }
+}
 }

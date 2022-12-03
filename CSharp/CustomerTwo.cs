@@ -6,9 +6,10 @@ namespace CSharp
 {
     public partial class Customer
     {
-        public void Print()
+
+        partial void PrintPartial()
         {
-            Console.WriteLine(FirstName +" "+LastName);
+            Console.WriteLine("Partial Invokes");
         }
 
     }
