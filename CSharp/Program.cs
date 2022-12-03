@@ -6,31 +6,44 @@ namespace CSharp
     {
         public static void Main()
         {
-            var equal = Calculator<int>.AreEqual(1, 2);
-
-
-            //Using the Generic Class
-            var equal1 = Calculator<int>.AreEqual(1, 2);
-            var equal2 = Calculator<string>.AreEqual("VAL", "VAL");
-            
-            // Case the Class is not Generic & The Method is Generic
-            //var equal3 = Calculator.AreEqual<double>(1.4,1.5);
-
-            Console.WriteLine(equal ? "Equal" : "Not Equal");
-            Console.WriteLine(equal1 ? "Equal" : "Not Equal");
-            Console.WriteLine(equal2 ? "Equal" : "Not Equal");
-
-
+            var c1= new Customer();
+            var c2= new Customer();
+            c1.FirstName = "Ali";
+            c1.LastName = "Omar";
+            c2.FirstName = "Ali";
+            c2.LastName = "Omar";
+            var equals = c1.Equals(c2);
+            Console.WriteLine(equals);
+            Console.WriteLine(c1 == c2);
         }
         
     }
 
-    public class Calculator<T>
+    public class Customer
     {
-        //  Generic Method using <T>
-        public static bool AreEqual /*   <T> */( T val1, T val2)
+        //  ToString Override
+        public override string ToString()
         {
-            return val1.Equals(val2);
+            return "I'm Overriding ToString Method";
         }
+        //  Equals Override
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Customer))
+                return false;
+
+            return (FirstName == ((Customer) obj).FirstName && this.LastName == ((Customer) obj).LastName);
+        }
+        //  GetHashCode Override
+
+        public override int GetHashCode()
+        {
+            return FirstName.GetHashCode() ^ LastName.GetHashCode();
+        }
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
     }
 }
