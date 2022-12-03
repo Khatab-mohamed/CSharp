@@ -12,6 +12,9 @@ namespace CSharp
         
     }
 
+    /// <summary>
+    /// Partial Classes Allow Us to split classes into 2 or more Files
+    /// </summary>
     public partial class Customer
     {
        public string FirstName { get; set; }
