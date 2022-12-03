@@ -6,35 +6,31 @@ namespace CSharp
     {
         public static void Main()
         {
-            var customers =new Customer[3];
+            var equal = Calculator<int>.AreEqual(1, 2);
 
-            customers[0] = new Customer { Name = "Ali", Gender = Gender.Female};
-            customers[1] = new Customer { Name = "Omar", Gender = Gender.Male};
-            customers[2] = new Customer { Name = "Hassan", Gender = Gender.Unknown};
-            foreach (var customer in customers)
-            {
-                Console.WriteLine("Name: {0} Gender: {1}",customer.Name,customer.Gender );
-            }
+
+            //Using the Generic Class
+            var equal1 = Calculator<int>.AreEqual(1, 2);
+            var equal2 = Calculator<string>.AreEqual("VAL", "VAL");
+            
+            // Case the Class is not Generic & The Method is Generic
+            //var equal3 = Calculator.AreEqual<double>(1.4,1.5);
+
+            Console.WriteLine(equal ? "Equal" : "Not Equal");
+            Console.WriteLine(equal1 ? "Equal" : "Not Equal");
+            Console.WriteLine(equal2 ? "Equal" : "Not Equal");
+
+
         }
-
+        
     }
 
-    public class Customer
+    public class Calculator<T>
     {
-        public string Name { get; set; }
-        public Gender Gender { get; set; }
+        //  Generic Method using <T>
+        public static bool AreEqual /*   <T> */( T val1, T val2)
+        {
+            return val1.Equals(val2);
+        }
     }
-    /// <summary>
-    /// Enum is Strongly Typed Constants
-    /// for set of integral Numbers, replacing them with Enums
-    /// To make the code more---> Readable, Maintainable
-    /// </summary>
-
-    public enum Gender
-    {
-        Unknown,
-        Male,
-        Female
-    }
-    
 }
